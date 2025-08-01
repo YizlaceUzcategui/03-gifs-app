@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { environment } from 'src/environments/environment';
+/* import { environment } from '../../../../../environments/environment.development'; */
 
 @Component({
   selector: 'gifs-side-menu-header',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './gifs-side-menu-header.component.html',
 
 })
-export class GifsSideMenuHeaderComponent { }
+export class GifsSideMenuHeaderComponent {
+  envs = environment;
+}
