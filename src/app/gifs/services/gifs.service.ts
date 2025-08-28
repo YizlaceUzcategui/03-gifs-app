@@ -7,7 +7,7 @@ import { GifMapper } from '../mapper/gif.mapper';
 import { map, tap } from 'rxjs';
 
 const loadFromLocalStorage = () => {
-  const gifsFromLocalstorage = localStorage.getItem('gifs') ?? '{}';
+  const gifsFromLocalstorage = localStorage.getItem('historyData') ?? '{}';
   const gifs = JSON.parse(gifsFromLocalstorage);
   return gifs;
 }
@@ -17,7 +17,6 @@ export class GifService {
 
   private http = inject(HttpClient);
 
-
   trendingGifs = signal<Gif[]>([]);
   trendingGifsLoading = signal(true);
 
@@ -26,7 +25,7 @@ export class GifService {
 
   saveToLocalStorage = effect(() => {
     const history = JSON.stringify(this.searchHistory());
-    localStorage.setItem(`gifs`, history);
+    localStorage.setItem(`historyData`, history);
 
     console.log(`Historial de búsquedas: ${Object.keys(history).length} entradas`);
 
@@ -73,11 +72,6 @@ export class GifService {
   );
 
 
-    // .subscribe((resp) => {
-    //   const gifs = GifMapper.mapGiphyItemsToGifArray(resp.data);
-
-    //   console.log({ search: gifs });
-    // });
   }
 
   getHistoryGifs (query: string) {
